@@ -1,0 +1,12 @@
+[Auth]
+username = user1
+passw = passw0rd
+
+[FTP]
+username = user2
+passw = passw0rd2
+host = 10.205.x.x
+
+[S2309TP-EI]
+sw_path = soft
+sw_image = S2300EI-V100R006C05.cc

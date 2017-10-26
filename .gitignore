@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Actual logins and passwords
+config.ini
