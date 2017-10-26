@@ -69,7 +69,6 @@ class NotConnected(Exception):
         Exception.__init__(self, "Trying to do something on device without connection.")
 
 
-
 def setup_logger(name, verbosity=1):
     """
     Basic logger
@@ -104,7 +103,7 @@ class NE(object):
         self.prompt = ''
         self.pager = self.init_pager()
         self.ip = ip
-        self.l = setup_logger('net.equipment.generic', 2)  # 2 means debug
+        self.l = setup_logger('net.equipment.generic', 0)  # 2 means debug
         self.username = username
         self.passw = passw
         self.is_connected = False
@@ -467,15 +466,11 @@ class NE(object):
         if not self.expect([b'\[Y\/N\]', ])[0]:
             self.l.error('Can not find reboot prompt')
             return False
-        self.send('n')
+        self.send('y')
         self._sleep(1)
         self.disconnect()
 
-
-
-
-
-        return False
+        return True  # finally, it's done!
 
 
 if __name__ == '__main__':
@@ -490,7 +485,6 @@ if __name__ == '__main__':
     ftp_passw = config['FTP']['passw']
     print("Trying to upgrade NE with IP: %s, login: %s" % (ip, username))
 
-    ip = '10.205.28.124'
     ne = NE(ip, username, passw)
     ne.connect()
     ne.login()
@@ -508,6 +502,5 @@ if __name__ == '__main__':
             exit(0)
         else:
             exit(1)
-
 
     exit(0)
